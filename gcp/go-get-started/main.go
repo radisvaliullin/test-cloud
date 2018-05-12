@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	// Imports the Google Cloud Storage client package.
 	"cloud.google.com/go/storage"
@@ -14,7 +15,8 @@ func main() {
 	ctx := context.Background()
 
 	// Sets your Google Cloud Platform project ID.
-	projectID := ""
+	projectID := os.Getenv("APP_PROJECT_ID")
+	log.Println("proj ID ", projectID)
 
 	// Creates a client.
 	client, err := storage.NewClient(ctx)
@@ -23,7 +25,8 @@ func main() {
 	}
 
 	// Sets the name for the new bucket.
-	bucketName := "my-new-bucket"
+	bucketName := os.Getenv("APP_PROJECT_NEWBUCKET")
+	log.Println("proj new bucket name - ", bucketName)
 
 	// Creates a Bucket instance.
 	bucket := client.Bucket(bucketName)
